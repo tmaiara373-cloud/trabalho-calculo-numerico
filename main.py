@@ -4,6 +4,13 @@ import math
 
 LIMITE_A = math.log(2)
 
+class Foguete:
+    def __init__(self, a, di, ds, epsilon):
+        self.a = a
+        self.di = di
+        self.ds = ds
+        self.epsilon = epsilon
+
 
 def main():
 
@@ -28,6 +35,9 @@ def main():
         a = float(input("Valor de a: "))
         di = float(input("Limite inferior do isolamento: "))
         ds = float(input("Limite superior do isolamento: "))
+
+        # Cria o objeto foguete
+        foguete = Foguete(a, di, ds, epsilon)
 
         # Cria a função para o valor de a informado
         def f(d):
