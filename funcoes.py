@@ -8,3 +8,11 @@ def funcao(d, a):
     """
 
     return a * d - d * math.log(d)
+
+def derivada(d, a):
+    """
+    Derivada da função do Tema 1:
+    f'(d) = a - ln(d) - 1
+    """
+
+    return a - math.log(d) - 1
