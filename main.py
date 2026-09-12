@@ -1,5 +1,8 @@
 from funcoes import funcao
 from posicao_falsa import posicao_falsa
+import math 
+
+LIMITE_A = math.log(2)
 
 
 def main():
@@ -50,6 +53,12 @@ def main():
                 print("Status: FOGUETE EXPLODE")
             else:
                 print("Status: FOGUETE NÃO EXPLODE")
+
+            # Analisa o valor de a
+            if a <= LIMITE_A:
+                print(f"Valor de a está dentro do limite ({LIMITE_A:.6f}).")
+            else:
+                print(f"Valor de a ultrapassa o limite ({LIMITE_A:.6f}).")
 
             # Tabela das iterações
             print("\n===== TABELA DE ITERAÇÕES =====")
