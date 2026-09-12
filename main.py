@@ -11,6 +11,17 @@ class Foguete:
         self.ds = ds
         self.epsilon = epsilon
 
+    def calcular_posicao(self):
+        def f(d):
+            return funcao(d, self.a)
+
+        return posicao_falsa(
+            f,
+            self.di,
+            self.ds,
+            self.epsilon
+        )
+
 
 def main():
 
@@ -45,13 +56,8 @@ def main():
 
         try:
 
-            # Aplica o método da Posição Falsa
-            raiz, tabela = posicao_falsa(
-                f,
-                di,
-                ds,
-                epsilon
-            )
+            # Calcula a posição usando o método da Posição Falsa
+            raiz, tabela = foguete.calcular_posicao()
 
             # Resultado
             print("\n===== RESULTADO =====")
