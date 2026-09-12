@@ -25,11 +25,7 @@ class Foguete:
 
 def main():
 
-    print("======================================")
-    print("       TRABALHO DE CÁLCULO NUMÉRICO")
-    print("          TEMA 1 - FOGUETE")
-    print("          MÉTODO DA POSIÇÃO FALSA")
-    print("======================================")
+    
 
     # Entrada da quantidade de foguetes
     n = int(input("\nNúmero de foguetes: "))
@@ -70,11 +66,18 @@ def main():
             else:
                 print("Status: FOGUETE NÃO EXPLODE")
 
-            # Analisa o valor de a
+            
+            # Análise de segurança
+            print("\n===== ANÁLISE DE SEGURANÇA =====")
+            print(f"Limite de a: {LIMITE_A:.6f}")
+            print(f"Valor de a: {a:.6f}")
+
             if a <= LIMITE_A:
-                print(f"Valor de a está dentro do limite ({LIMITE_A:.6f}).")
+                print("Conclusão: a <= ln(2)")
+                print("Status: FOGUETE NÃO EXPLODE")
             else:
-                print(f"Valor de a ultrapassa o limite ({LIMITE_A:.6f}).")
+                print("Conclusão: a > ln(2)")
+                print("Status: FOGUETE EXPLODE")
 
             # Tabela das iterações
             print("\n===== TABELA DE ITERAÇÕES =====")
