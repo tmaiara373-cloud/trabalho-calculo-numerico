@@ -29,14 +29,13 @@ def newton_raphson(funcao, derivada, d0, epsilon, max_iter=100):
         #guarda os dados da iteração
         tabela.append({
             "iteracao": iteracao,
-            "d_atual": d_atual,
-            "f_d": f_d,
-            "df_d": df_d,
-            "d_proximo": d_proximo,
+            "di": d_atual,
+            "f_dr": f_d,
+            "ds": df_d,
+            "dr": d_proximo,
             "erro": erro
         })
 
         d_atual = d_proximo
 
     return d_atual, tabela
-    
