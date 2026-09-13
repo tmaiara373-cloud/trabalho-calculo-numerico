@@ -1,5 +1,6 @@
-from funcoes import funcao
+from funcoes import funcao, derivada
 from posicao_falsa import posicao_falsa
+from newton_raphson import newton_raphson
 import math 
 
 LIMITE_A = math.log(2)
@@ -22,16 +23,36 @@ class Foguete:
             self.epsilon
         )
 
+    def calcular_newton_raphson(self):
+        def f(d):
+            return funcao(d, self.a)
+
+        def df(d):
+            return derivada(d, self.a)
+
+        #Estimativa inicial para o deslocamento
+        d0 = (self.di + self.ds) / 2.0
+
+        return newton_raphson(
+            f,
+            df,
+            d0,
+            self.epsilon
+        )
 
 def main():
-
-    
 
     # Entrada da quantidade de foguetes
     n = int(input("\nNúmero de foguetes: "))
 
     # Entrada da precisão
     epsilon = float(input("Precisão (epsilon): "))
+
+    # Menu para escolha do método
+    print("\nEscolha o método numérico:")
+    print("1 - Posição Falsa")
+    print("2 - Newton-Raphson")
+    opcao_metodo = int(input("Opção (1 ou 2): "))
 
     # Processa cada foguete
     for i in range(1, n + 1):
@@ -51,12 +72,23 @@ def main():
             return funcao(d, a)
 
         try:
-
-            # Calcula a posição usando o método da Posição Falsa
-            raiz, tabela = foguete.calcular_posicao()
+            # Seleciona o método numérico escolhido
+            if opcao_metodo == 1:
+                raiz, tabela = foguete.calcular_posicao()
+                nome_metodo = "Posição Falsa"
+                col_2 = "di"
+                col_3 = "ds"
+            elif opcao_metodo == 2:
+                raiz, tabela = foguete.calcular_newton_raphson()
+                nome_metodo = "Newton-Raphson"
+                col_2 = "d_k"
+                col_3 = "f'(d_k)"
+            else:
+                print("Opção de método inválida!")
+                return
 
             # Resultado
-            print("\n===== RESULTADO =====")
+            print(f"\n===== RESULTADO ({nome_metodo.upper()}) =====")
             print(f"Deslocamento encontrado: {raiz:.6f} cm")
             print(f"Número de iterações: {len(tabela)}")
 
@@ -80,12 +112,12 @@ def main():
                 print("Status: FOGUETE EXPLODE")
 
             # Tabela das iterações
-            print("\n===== TABELA DE ITERAÇÕES =====")
+            print(f"\n===== TABELA DE ITERAÇÕES ({nome_metodo.upper()}) =====")
 
             print(
                 f"{'Iter.':<8}"
-                f"{'di':<12}"
-                f"{'ds':<12}"
+                f"{col_2:<12}"
+                f"{col_3:<12}"
                 f"{'dr':<12}"
                 f"{'f(dr)':<15}"
                 f"{'Erro':<15}"
@@ -103,7 +135,6 @@ def main():
                 )
 
         except ValueError as erro:
-
             print(f"\nErro: {erro}")
 
 
